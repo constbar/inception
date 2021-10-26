@@ -11,3 +11,11 @@ stop:
 down:
 	docker-compose -f ./srcs/docker-compose.yml down
 
+ps:
+	docker-compose -f ./srcs/docker-compose.yml ps
+
+rm:
+	docker-compose -f ./srcs/docker-compose.yml rm
+
+docker rm:
+	docker rm $(docker ps -a -q)

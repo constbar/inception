@@ -1,0 +1,80 @@
+version: "3.5"
+
+networks:
+  inception:
+    driver:
+      bridge
+
+services:
+  mariadb:
+    networks:
+      - inception
+    container_name:
+      mariadb
+    image:
+      mariadb
+    volumes:
+      - wp:/var/www/html/wordpress
+    restart:
+      always
+    environment:
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      
+  wordpress:
+    networks:
+      - inception
+    container_name:
+      wordpress
+    image:
+      wordpress
+    depends_on:
+      - mariadb
+    restart:
+      ways
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+
+  nginx:
+    networks:
+      - inception
+    container_name:
+      nginx
+    image:
+      nginx
+    ports:
+      - "443:443"
+    volumes:
+      - wp:/var/www/html/wordpress
+    depends_on:
+      - wordpress
+    restart:
+      always
+
+volumes:
+  db:
+    name:
+      db
+    driver:
+      local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/${USERNAME}/data/db
+  wp:
+    name:
+      wp
+    driver:
+      local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/${USERNAME}/data/wp
+
+
+      
+# all containers shoulbe without image
