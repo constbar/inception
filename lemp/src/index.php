@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>hola todos</title>
+        <title>Hello there</title>
         <style>
             body {
                 font-family: "Arial", sans-serif;
