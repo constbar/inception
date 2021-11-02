@@ -1,47 +1,32 @@
 version: "3.5"
 
 networks:
-  inception:
-    driver:
-      bridge
+  localhost:
+    driver: bridge
+
+volumes:
+  wordpress:
+    name: wordpress
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/agroup/data/wordpress
+
+  maria_db:
+    name: maria_db
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/agroup/data/mysql
 
 services:
-  mariadb:
-    networks:
-      - inception
-    container_name:
-      mariadb
-    image:
-      mariadb
-    volumes:
-      - wp:/var/www/html/wordpress
-    restart:
-      always
-    environment:
-      DB_NAME: ${DB_NAME}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-      
-  wordpress:
-    networks:
-      - inception
-    container_name:
-      wordpress
-    image:
-      wordpress
-    depends_on:
-      - mariadb
-    restart:
-      ways
-    environment:
-      DB_HOST: ${DB_HOST}
-      DB_NAME: ${DB_NAME}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
-
   nginx:
-    networks:
-      - inception
+    depends_on:
+      - wordpress
+    build:
+      ./requirements/nginx
     container_name:
       nginx
     image:
@@ -49,32 +34,44 @@ services:
     ports:
       - "443:443"
     volumes:
-      - wp:/var/www/html/wordpress
-    depends_on:
-      - wordpress
+      - wordpress:/var/wordpress
+    networks:
+      - localhost
     restart:
       always
 
-volumes:
-  db:
-    name:
-      db
-    driver:
-      local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/${USERNAME}/data/db
-  wp:
-    name:
-      wp
-    driver:
-      local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/${USERNAME}/data/wp
+  wordpress:
+    depends_on:
+      - mariadb
+    build:
+      ./requirements/wordpress
+    container_name:
+      wordpress
+    image:
+      wordpress
+    volumes:
+      - wordpress:/var/wordpress
+    networks:
+      - localhost
+    restart:
+      always
 
+  mariadb:
+    build:
+      context:
+        ./requirements/mariadb
+      args:
+        USER: $MYSQL_USER
+        PASSWORD: $MYSQL_PASSWORD
+        DATABASE: $MYSQL_DATABASE
+    container_name:
+      mariadb
+    image:
+      mariadb
+    volumes:
+      - maria_db:/var/lib/mysql
+    networks:
+      - localhost
+    restart:
+      always
 
-      
-# all containers shoulbe without image
