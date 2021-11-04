@@ -1,3 +1,4 @@
+#!/bin/bash
 rc-service mariadb setup > /dev/null 2>&1
 openrc > /dev/null 2>&1 && rc-service mariadb start > /dev/null 2>&1
 mysql --execute="CREATE DATABASE $DATABASE;"

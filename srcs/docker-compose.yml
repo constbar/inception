@@ -74,4 +74,3 @@ services:
       - localhost
     restart:
       always
-
