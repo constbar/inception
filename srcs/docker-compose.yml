@@ -11,7 +11,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/agroup/data/wordpress
+      device: /home/constbar/data/wordpress
 
   maria_db:
     name: maria_db
@@ -19,7 +19,7 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/agroup/data/mysql
+      device: /home/constbar/data/mysql
 
 services:
   nginx:
