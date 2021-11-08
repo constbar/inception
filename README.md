@@ -33,7 +33,7 @@ visit `https://127.0.0.1/wp-login.php` and try
 
 to check mysql:
 
-enter to mysql container to see existing users.
+enter mysql container to see existing users.
 ```
 docker exec -it mariadb sh
 mysql -h mariadb -u constbar -p
