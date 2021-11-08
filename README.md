@@ -15,7 +15,7 @@ before launching `docker` and `docker-compose` should be installed.
 
 hostname, password and username for mysql you can find in the `.env` file.
 
-to launch the project:
+**to launch the project:**
 ```
 make
 ```
