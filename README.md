@@ -25,7 +25,7 @@ to check wp admin dashboard:
 
 in wordpress database, there are two users, one of them is the administrator.
 
-visit `https://127.0.0.1/wp-login.php` and try
+visit `https://127.0.0.1/wp-login.php`
 
 `Jack Sparrow` `oaAAz#qyFgQTbUrDW(b*Z1pT`
 
