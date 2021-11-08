@@ -13,7 +13,7 @@ also services have volumes on the server for data safety.
 ### how to use
 before launching `docker` and `docker-compose` should be installed.
 
-hostname, password and username for mysql you can in the .env file.
+hostname, password and username for mysql you can find in the `.env` file.
 
 to launch the project:
 ```
