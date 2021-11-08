@@ -21,7 +21,7 @@ make
 ```
 go to the site `https://127.0.0.1` to see starting wp page.
 
-to check wp admin dashboard:
+**to check wp admin dashboard:**
 
 in wordpress database, there are two users, one of them is the administrator.
 
@@ -31,7 +31,7 @@ visit `https://127.0.0.1/wp-login.php`
 
 `Captain Salazar` `c7khJJSd0NO8dsT@lAKoHa(#`
 
-to check mysql:
+**to check mysql:**
 
 enter mysql container to see existing users.
 ```
@@ -41,7 +41,7 @@ blackpearl
 use wordpress;
 select * from wp_users;
 ```
-to stop the project:
+**to stop the project:**
 
 the next command will also delete all docker images, pay attention.
 ```
