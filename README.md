@@ -1,6 +1,6 @@
 ## inception
 
-project of 42 school where it is necessary to create LEMP via docker-compose on localhost.
+project of École 42 where it is necessary to create LEMP via docker-compose on localhost.
 
 the linked docker network consists of several services like nginx with TLSv1.3 protocol, wordpress + php-fpm and mariaDB.
 
